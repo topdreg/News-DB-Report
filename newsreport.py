@@ -28,7 +28,8 @@ print("\n")
 
 query2 = """select authors.name, count(articles.author) as numTitle
 from authors, articles, log  
-where log.path like concat('%', articles.slug) and authors.id = articles.author
+where log.path like concat('%', articles.slug) 
+and authors.id = articles.author
 group by authors.name 
 order by numTitle desc;"""
 
@@ -41,14 +42,19 @@ print("\n")
 
 # Show the days where more than 1% of requests lead to errors. 
 
-query3 = """select date(log.time) as day, (sum(case when log.status like '4%' then 1 else 0 end) * 100)::float / count(*) as numtime
+query3 = """select date(log.time) as day, 
+(sum(case when log.status like '4%' then 1 else 0 end) * 100)::float / 
+count(*) as numtime
 from log
 group by day
-having (sum(case when log.status like '4%' then 1 else 0 end) * 100)::float / count(*) > 1;"""
+having (sum(case when log.status like '4%' then 1 else 0 end) * 100)::float 
+/ count(*) > 1;"""
 
 cursor.execute(query3) 
 info = cursor.fetchall() 
 print("The days where more than 1% of requests lead to errors are: ")  
 for item in info: 
-    print(datetime.datetime.strptime(str(info[0][0]), '%Y-%m-%d').strftime('%B %d, %Y') + " — " + str(round(item[1], 2)) + "% errors") 
+    print(datetime.datetime.strptime(str(info[0][0]), 
+    '%Y-%m-%d').strftime('%B %d, %Y') + " — " 
+    + str(round(item[1], 2)) + "% errors") 
 print("\n")
