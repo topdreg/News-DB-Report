@@ -1,6 +1,8 @@
+<h3>Project Description:</h3> 
 The code in newsreport.py deals with linking to a PostgreSQL database that contains news articles and 
 generating a few reports on the command line, such as most popular articles and most popular authors. 
 
+Dependencies/Prerequisites:
 To run the code, you first need to have access to the database, which is stored in a vagrant directory to be
 run through a Virtualbox. The vagrant directory can be found here: https://github.com/udacity/fullstack-nanodegree-vm
 
